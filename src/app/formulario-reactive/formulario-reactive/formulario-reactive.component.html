@@ -1,20 +1,59 @@
-<p>Works</p>
+<form (ngSubmit)="agregarProyecto()" [formGroup]="miFormulario" class="form-group container" autocomplete="off">
+    <div *ngIf="validar()" class="alert alert-danger d-flex align-items-center" role="alert">
+        <i class="bi bi-exclamation-triangle"></i>
+    <div>Error: Formulario invalido</div>
+  </div>
 
-<!-- <form class="form-group container" autocomplete="off">
+  <pre>{{miFormulario.invalid}}</pre>
+
     <div>
-        <label for="proyecto">Proyecto</label>
-        <input class="form-control" type="text" id="proyecto" placeholder="Nombre del proyecto"/>
+        <label for="proyectoR">Proyecto</label>
+        <input formControlName="proyecto" class="form-control" type="text" id="proyectoR" placeholder="Nombre del proyecto"/>
     </div>
     <div>
-        <label for="horas">Horas</label>
-        <input class="form-control" type="number" id="horas" placeholder="Selecciona las horas para completar el proyecto"/>
+        <label for="horasR">Horas</label>
+        <input formControlName="horas" class="form-control" type="number" id="horasR" placeholder="Selecciona las horas para completar el proyecto"/>
     </div>
     <div>
-        <label for="tecnologias">Tecnologías</label>
-        <input class="form-control" type="text" id="tecnologias" placeholder="Nombre de la tecnologia"/>
+        <label for="tecnologia">Tecnologías</label>
+        <div class="row">
+            <div class="col-8">
+                <input [formControl]="tecnologia" name="tecnologia" class="form-control" type="text" id="tecnologia" placeholder="Nombre de la tecnologia"
+                />
+            </div>
+            <div class="col-4">
+                <button type="button" (click)="agregarTec()" class="btn btn-success">Agregar</button>
+            </div>
+            <div class="col-12 my-2">
+                <ul class="list-group list-group-horizontal">
+                    <li class="list-group-item" *ngFor="let t of tecnologias.value">{{t}}</li>
+                  </ul>
+            </div>
+        </div>
     </div>
     <div>
         <button type="submit" class="btn btn-info mt-2 w-100">Agregar proyecto</button>
     </div>
     
-</form> -->
+</form>
+
+<div class="container">
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Proyecto</th>
+            <th scope="col">Horas</th>
+            <th scope="col">Tecnologias</th>
+          </tr>
+        </thead>
+         <tbody>
+          <tr *ngFor="let p of proyectos; index as i">
+            <th scope="row">{{i+1}}</th>
+            <td>{{p.proyecto}}</td>
+            <td>{{p.horas}}</td>
+            <td>{{p.tecnologias}}</td>
+          </tr>
+        </tbody>
+      </table>
+</div>
