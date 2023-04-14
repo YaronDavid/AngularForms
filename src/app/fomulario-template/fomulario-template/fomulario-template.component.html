@@ -1,0 +1,36 @@
+<div *ngIf="miFormulario.invalid && miFormulario.touched" class="alert alert-danger d-flex align-items-center" role="alert">
+    <i class="bi bi-exclamation-triangle"></i>
+    <div>Error: Formulario invalido</div>
+  </div>
+
+<form class="form-group container" autocomplete="off" (ngSubmit)="agregar()" #miFormulario="ngForm">
+    <div>
+        <label for="proyecto">Proyecto</label>
+        <input ngModel name="proyecto" class="form-control" type="text" id="proyecto" placeholder="Nombre del proyecto" minlength="5"/>
+    </div>
+    <div>
+        <label for="horas">Horas</label>
+        <input ngModel name="horas" class="form-control" type="number" id="horas" placeholder="Selecciona las horas para completar el proyecto"/>
+    </div>
+    <div>
+        <label for="tecnologias">Tecnologías</label>
+        <div class="row">
+            <div class="col-12 col-md-8">
+                <input ngModel name="tecnologias" class="form-control" type="text" id="tecnologias" placeholder="Nombre de la tecnologia"/>
+            </div>
+            <div class="col-12 col-md-4">
+                <button class="btn btn-success">Agregar</button>
+            </div>
+        </div>
+    </div>
+    <div>
+        <button type="submit" class="btn btn-info mt-2 w-100">Agregar proyecto</button>
+    </div>
+    
+</form>
+
+<pre>
+    Proyecto: {{miFormulario.value | json}}
+    Valido: {{miFormulario.valid}}
+    Errores: {{miFormulario.controls["proyecto"].errors | json}}
+</pre>
