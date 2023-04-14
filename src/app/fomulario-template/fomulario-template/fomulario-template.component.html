@@ -6,20 +6,31 @@
 <form class="form-group container" autocomplete="off" (ngSubmit)="agregar()" #miFormulario="ngForm">
     <div>
         <label for="proyecto">Proyecto</label>
-        <input ngModel name="proyecto" class="form-control" type="text" id="proyecto" placeholder="Nombre del proyecto" minlength="5"/>
+        <input [(ngModel)]="initialState.proyecto" name="proyecto" class="form-control" type="text" id="proyecto" placeholder="Nombre del proyecto"
+        required minlength="5" maxlength="10"
+        />
     </div>
     <div>
         <label for="horas">Horas</label>
-        <input ngModel name="horas" class="form-control" type="number" id="horas" placeholder="Selecciona las horas para completar el proyecto"/>
+        <input [(ngModel)]="initialState.horas" name="horas" class="form-control" type="number" id="horas" placeholder="Selecciona las horas para completar el proyecto"
+        required min="0" max="20"
+        />
     </div>
     <div>
-        <label for="tecnologias">Tecnologías</label>
+        <label for="tecnologia">Tecnologías</label>
         <div class="row">
-            <div class="col-12 col-md-8">
-                <input ngModel name="tecnologias" class="form-control" type="text" id="tecnologias" placeholder="Nombre de la tecnologia"/>
+            <div class="col-8">
+                <input [(ngModel)]="initialState.tecnologia" name="tecnologia" class="form-control" type="text" id="tecnologia" placeholder="Nombre de la tecnologia"
+                minlength="3" maxlength="30"
+                />
             </div>
-            <div class="col-12 col-md-4">
-                <button class="btn btn-success">Agregar</button>
+            <div class="col-4">
+                <button type="button" (click)="agregarTec()"  class="btn btn-success">Agregar</button>
+            </div>
+            <div class="col-12 my-2">
+                <ul class="list-group list-group-horizontal">
+                    <li class="list-group-item" *ngFor="let t of tecnologias">{{t}}</li>
+                  </ul>
             </div>
         </div>
     </div>
@@ -29,8 +40,21 @@
     
 </form>
 
-<pre>
-    Proyecto: {{miFormulario.value | json}}
-    Valido: {{miFormulario.valid}}
-    Errores: {{miFormulario.controls["proyecto"].errors | json}}
-</pre>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Proyecto</th>
+        <th scope="col">Horas</th>
+        <th scope="col">Tecnologias</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of proyectos; index as i">
+        <th scope="row">{{i+1}}</th>
+        <td>{{p.proyecto}}</td>
+        <td>{{p.horas}}</td>
+        <td>{{p.tecnologias}}</td>
+      </tr>
+    </tbody>
+  </table>
